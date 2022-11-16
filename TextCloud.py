@@ -34,5 +34,5 @@ plt.axis("off")
 plt.tight_layout(pad=0)
 
 # plt.show()
-plt.savefig("word_cloud.png")
+plt.savefig("text_cloud.png")
 plt.close()

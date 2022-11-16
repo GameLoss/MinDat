@@ -51,5 +51,5 @@ plt_lr(df=df_by_sal, x="Year", y="Global_Sales", \
      colors=('red', 'orange'), **a)
 
 plt.xticks(rotation=90)
-plt.savefig('i.png')
+plt.savefig('forecasting.png')
 plt.close()
