@@ -41,13 +41,13 @@ def plt_lr(df: pd.DataFrame, x:str, y: str, m: float, b: float, r2: float, r2_ad
 df = pd.read_csv("./csv/vgsales.csv") # type: pd.DataFrame
 print_tabulate(df.head(100))
 df_by_sal = df.groupby("Year")\
-              .aggregate(sueldo_mensual=pd.NamedAgg(column="Global_Sales", aggfunc=pd.DataFrame.mean))
+              .aggregate(Global_Sales=pd.NamedAgg(column="Global_Sales", aggfunc=pd.DataFrame.mean))
 df_by_sal.reset_index(inplace=True)
-# df_by_sal["sueldo_mensual"] = df_by_sal["sueldo_mensual"]**10
+# df_by_sal["Global_Sales"] = df_by_sal["sueldo_mensual"]**10
 # print_tabulate(df_by_sal.head(5))
 print("esta?? " + str(' '.join(df_by_sal.columns)))
-a = linear_regression(df_by_sal, "Year", "sueldo_mensual")
-plt_lr(df=df_by_sal, x="Year", y="sueldo_mensual", \
+a = linear_regression(df_by_sal, "Year", "Global_Sales")
+plt_lr(df=df_by_sal, x="Year", y="Global_Sales", \
      colors=('red', 'orange'), **a)
 
 plt.xticks(rotation=90)

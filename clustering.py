@@ -1,11 +1,9 @@
-#Algoritmo "K nearest neighbor"
 import pandas as pd
 from tabulate import tabulate
 import matplotlib.pyplot as plt
 from typing import Tuple, Dict, List
 import numpy as np
 from functools import reduce
-from scipy.stats import mode
 
 
 def print_tabulate(df: pd.DataFrame):
@@ -61,36 +59,66 @@ def euclidean_distance(p_1: np.array, p_2: np.array) -> float:
     return np.sqrt(np.sum((p_2 - p_1) ** 2))
 
 
-def k_nearest_neightbors(
-    points: List[np.array], labels: np.array, input_data: List[np.array], k: int
-):
-    input_distances = [
-        [euclidean_distance(input_point, point) for point in points]
-        for input_point in input_data
-    ]
-    points_k_nearest = [
-        np.argsort(input_point_dist)[:k] for input_point_dist in input_distances
-    ]
-    return [
-        mode([labels[index] for index in point_nearest])
-        for point_nearest in points_k_nearest
-    ]
+def k_means(points: List[np.array], k: int):
+    DIM = len(points[0])
+    N = len(points)
+    num_cluster = k
+    iterations = 15
 
+    x = np.array(points)
+    y = np.random.randint(0, num_cluster, N)
 
-groups = [(20, 20, "grupo1"), (80, 40, "grupo2"), (200, 200, "grupo3")]
-df = generate_df(groups, 50)
-scatter_group_by("groups.png", df, "x", "y", "label")
+    mean = np.zeros((num_cluster, DIM))
+    for t in range(iterations):
+        for k in range(num_cluster):
+            mean[k] = np.mean(x[y == k], axis=0)
+        for i in range(N):
+            dist = np.sum((mean - x[i]) ** 2, axis=1)
+            pred = np.argmin(dist)
+            y[i] = pred
+
+    for kl in range(num_cluster):
+        xp = x[y == kl, 0]
+        yp = x[y == kl, 1]
+        plt.scatter(xp, yp)
+    plt.savefig("kmeans.png")
+    plt.close()
+    return mean
+
+"""
+df = pd.read_csv("./csv/vgsales.csv")
+dfclust = pd.DataFrame()
+
+dfclust["TP"] = df["Global_Sales"]
+dfclust["OP"] = df["Rank"]
+dfclust["date"] = df["Year"]
+
+dfclust["date"] = pd.to_datetime(dfclust["date"], format = "%Y-%m-%d")
+dfclust["date"] =[str(anio.year) for anio in dfclust["date"]]
+dfclust
+
 list_t = [
-    (np.array(tuples[0:1]), tuples[2])
-    for tuples in df.itertuples(index=False, name=None)
+    (np.array(tuples[0:2]), tuples[2])
+    for tuples in dfclust.itertuples(index=False, name=None)
 ]
 points = [point for point, _ in list_t]
 labels = [label for _, label in list_t]
 
-kn = k_nearest_neightbors(
+kn = k_means(points,3)
+"""
+
+groups = [(20, 20, "grupo1"), (300, 40, "grupo2"), (200, 200, "grupo3")]
+df = generate_df(groups, 50)
+scatter_group_by("clusters.png", df, "x", "y", "label")
+list_t = [
+    (np.array(tuples[0:2]), tuples[2])
+    for tuples in df.itertuples(index=False, name=None)
+]
+points = [point for point, _ in list_t]
+labels = [label for _, label in list_t]
+# np.random.seed(0)
+kn = k_means(
     points,
-    labels,
-    [np.array([100, 150]), np.array([1, 1]), np.array([1, 300]), np.array([80, 40])],
-    5,
+    3,
 )
 print(kn)
