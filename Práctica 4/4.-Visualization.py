@@ -4,7 +4,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("./csv/vgsales.csv")
+df = pd.read_csv("../csv/vgsales.csv")
 
 df_LIMP = pd.DataFrame.from_dict(df.loc[:,['Rank','Name','Platform','Year','NA_Sales','Global_Sales']])
 print(df_LIMP)

@@ -86,7 +86,7 @@ def k_means(points: List[np.array], k: int):
     return mean
 
 #"""
-df = pd.read_csv("./csv/vgsales.csv")
+df = pd.read_csv("../csv/vgsales.csv")
 dfclust = pd.DataFrame()
 
 dfclust["TP"] = df["Global_Sales"]

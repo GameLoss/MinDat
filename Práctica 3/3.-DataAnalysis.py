@@ -14,7 +14,7 @@ def analysis(file_name:str)->pd.DataFrame:
     print(sum(df["Global_Sales"]))
     return df
 
-df = analysis("./csv/vgsales.csv")
+df = analysis("../csv/vgsales.csv")
 print_tabulate(df.head())
 print_tabulate(df.describe())
 print(df["Global_Sales"].sum())

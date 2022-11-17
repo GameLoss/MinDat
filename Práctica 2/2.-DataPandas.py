@@ -7,7 +7,7 @@ from tabulate import tabulate
 #Code
 
 #from file
-df = pd.read_csv("./csv/vgsales.csv")
+df = pd.read_csv("../csv/vgsales.csv")
 print(df)
 
 df_LIMP = pd.DataFrame.from_dict(df.loc[:,['Rank','Name','Platform','Year','Genre','Publisher','NA_Sales', 'EU_Sales', 'JP_Sales',

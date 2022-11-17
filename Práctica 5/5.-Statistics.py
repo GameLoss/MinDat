@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 
-df = pd.read_csv("./csv/vgsales.csv")
+df = pd.read_csv("../csv/vgsales.csv")
 
 
 df_LIMP = pd.DataFrame.from_dict(df.loc[:,['Rank','Name','Platform','Year','Genre','Publisher','NA_Sales', 'EU_Sales', 'JP_Sales',

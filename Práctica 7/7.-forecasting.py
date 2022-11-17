@@ -38,7 +38,7 @@ def plt_lr(df: pd.DataFrame, x:str, y: str, m: float, b: float, r2: float, r2_ad
 
 
 
-df = pd.read_csv("./csv/vgsales.csv") # type: pd.DataFrame
+df = pd.read_csv("../csv/vgsales.csv") # type: pd.DataFrame
 print_tabulate(df.head(100))
 df_by_sal = df.groupby("Year")\
               .aggregate(Global_Sales=pd.NamedAgg(column="Global_Sales", aggfunc=pd.DataFrame.mean))

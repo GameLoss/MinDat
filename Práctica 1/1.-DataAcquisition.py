@@ -24,5 +24,5 @@ def print_tabulate(df: pd.DataFrame):
 #Code
 
 #from file
-df = pd.read_csv("./csv/vgsales.csv")
+df = pd.read_csv("../csv/vgsales.csv")
 print_tabulate(df)
