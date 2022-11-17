@@ -81,11 +81,11 @@ def k_means(points: List[np.array], k: int):
         xp = x[y == kl, 0]
         yp = x[y == kl, 1]
         plt.scatter(xp, yp)
-    plt.savefig("kmeans.png")
+    plt.savefig("clustering.png")
     plt.close()
     return mean
 
-"""
+#"""
 df = pd.read_csv("./csv/vgsales.csv")
 dfclust = pd.DataFrame()
 
@@ -105,8 +105,8 @@ points = [point for point, _ in list_t]
 labels = [label for _, label in list_t]
 
 kn = k_means(points,3)
+#"""
 """
-
 groups = [(20, 20, "grupo1"), (300, 40, "grupo2"), (200, 200, "grupo3")]
 df = generate_df(groups, 50)
 scatter_group_by("clusters.png", df, "x", "y", "label")
@@ -121,4 +121,4 @@ kn = k_means(
     points,
     3,
 )
-print(kn)
+print(kn)"""
